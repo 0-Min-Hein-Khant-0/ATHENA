@@ -26,10 +26,10 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        $subcategories = Subcategory::all();
+        $categories = Category::all();
         
         
-         return view('subcategory.create',compact('subcategories'));
+         return view('subcategory.create',['categories'=>$categories]);
     }
 
     /**
@@ -39,26 +39,28 @@ class SubcategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-       // dd($request);
+     {
+       //dd($request);
 
-        $request->validate([
+         $request->validate([
 
             "name"=>"required|min:5",
-            "category_id"=>"required"
+           "category_id"=>"required"
 
-        ]);
+       ]);
 
-        // store
-         $subcategory = new Subcategory;
+         // // store
+           $subcategory = new Subcategory;
+           // dd($subcategory);
          $subcategory->name = $request->name;
-         $subcategory->category_id = $request->category_id;
-         $subcategory->save();
+        
+          $subcategory->category_id = $request->category_id;
+          $subcategory->save();
 
-        // redirect
-         return redirect()->route('subcategory.index');
+         // // redirect
+           return redirect()->route('subcategory.index');
 
-    }
+     }
 
     /**
      * Display the specified resource.
@@ -68,7 +70,7 @@ class SubcategoryController extends Controller
      */
     public function show(Subcategory $subcategory)
     {
-        return view('sucategory.show', compact('subcategory'));
+        return view('subcategory.show', compact('subcategory'));
     }
 
     /**
@@ -79,7 +81,11 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory)
     {
-        //
+         // return view('subcategory.edit', compact('subcategory'));
+         $categories = Category::all();
+        
+        
+         return view('subcategory.edit',compact('subcategory'),['categories'=>$categories]);
     }
 
     /**
@@ -91,8 +97,25 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, Subcategory $subcategory)
     {
-        //
-    }
+        // dd($request);
+
+         $request->validate([
+
+            "name"=>"required|min:5",
+           "category_id"=>"required"
+
+       ]);
+
+         // // store
+           // dd($subcategory);
+
+           $subcategory->name = $request->name;
+        
+          $subcategory->category_id = $request->category_id;
+          $subcategory->save();
+
+         // // redirect
+           return redirect()->route('subcategory.index');    }
 
     /**
      * Remove the specified resource from storage.
@@ -102,6 +125,8 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        //
+         $subcategory->delete();
+
+        return redirect()->route('subcategory.index');
     }
 }

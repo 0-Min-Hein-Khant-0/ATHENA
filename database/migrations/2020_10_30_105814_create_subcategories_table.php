@@ -23,6 +23,8 @@ class CreateSubcategoriesTable extends Migration
                     ->on('categories')
                     ->onDelete('cascade');
 
+                    
+
             $table->timestamps();
         });
     }

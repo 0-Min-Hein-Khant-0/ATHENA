@@ -28,26 +28,17 @@
               @enderror
             </div>
 
-            {{-- <div class="form-group"> --}}
-              {{-- <label>Photo:</label>
-              <input type="file" name="photo" class="form-control-file @error('photo') is-invalid @enderror">
-              @error('photo')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror --}}
-
              <div class="form-group row">
             <label for="" class="col-sm-2 col-form-label d-block"> Choose Category </label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="category_id">
 
 
-                                  {{-- @foreach($subcategories as $row)
+                                  @foreach($categories as $row)
 
-                                  <option>{{$row->category_id}}</option>
+                                  <option value="{{$row->id}}">{{$row->name}}</option>
                                   @endforeach
- --}}
+
                                   
                                 </select>
                             </div>
@@ -62,3 +53,4 @@
     </div>
   </main>
 @endsection
+

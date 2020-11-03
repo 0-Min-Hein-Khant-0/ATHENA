@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MainController@welcome')->name('homepage');
+// Route::get('/', 'MainController@welcome')->name('homepage');
 
-Route::get('testing','MainController@testing')->name('testingpage');
+// Route::get('testing','MainController@testing')->name('testingpage');
 
-Route::get('about','MainController@about')->name('aboutpage');
+// Route::get('about','MainController@about')->name('aboutpage');
 
-Route::get('contact','MainController@contact')->name('contactpage');
+// Route::get('contact','MainController@contact')->name('contactpage');
 
 
 //CRUD Process
@@ -30,6 +30,12 @@ Route::resource('category','CategoryController');
 Route::resource('subcategory','SubcategoryController');
 
 Route::resource('item','ItemController');
+
+Route::post('filter','ItemController@filterCategory')->name('filterCategory');
+
+//Frontend
+
+Route::get('/', 'FrontendController@home')->name('mainpage');
 
 
 
