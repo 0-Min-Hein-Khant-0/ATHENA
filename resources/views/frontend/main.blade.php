@@ -1,18 +1,13 @@
 @extends('frontendtemplate')
 
 @section('content')
-<div class="container">
+  <div class="container">
 
     <div class="row">
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
-        </div>
+        <x-sidebar-component></x-sidebar-component>
 
       </div>
       <!-- /.col-lg-3 -->
@@ -47,25 +42,9 @@
         </div>
 
         <div class="row">
-        	@foreach($items as $row)
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{asset($row->photo)}}" alt="" width="50px"></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">{{$row->name}} </a>
-                </h4>
-                <h5>{{$row->price}} MMK</h5>
-                <p class="card-text">{{$row->description}}</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
+          @foreach($items as $item)
+            <x-item-component :item="$item"></x-item-component>
           @endforeach
-
         </div>
         <!-- /.row -->
 
@@ -76,4 +55,4 @@
     <!-- /.row -->
 
   </div>
-  @endsection
+@endsection
