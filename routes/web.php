@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //CRUD Process
+
+Route::middleware('role:admin')->group(function () {
 Route::resource('brand','BrandController');
 
 Route::resource('category','CategoryController');
@@ -32,7 +34,7 @@ Route::resource('subcategory','SubcategoryController');
 Route::resource('item','ItemController');
 
 Route::post('filter','ItemController@filterCategory')->name('filterCategory');
-
+});
 //Frontend
 
 Route::get('/', 'FrontendController@home')->name('mainpage');
@@ -40,6 +42,8 @@ Route::get('itemdetail/{id}', 'FrontendController@itemdetail')->name('itemdetail
 
 Route::get('itemsbysubcategory/{id}','FrontendController@itemsbysubcategory')->name('itemsbysubcategory');
 Route::get('cart', 'FrontendController@cart')->name('cartpage');
+
+Route::resource('order', 'OrderController');
 
 
 

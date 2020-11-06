@@ -79,7 +79,7 @@ $('.addtocartBtn').on('click', function(){
 				<td>${j++}</td>
 				<td>${name}</td>
 				<td><img src="${photo}" width="50px" height ="50px"></td>
-				<td><button class="btnincrease btn btn-info" data-id=${i}>++</button>${qty}<button class="btndecrease btn btn-danger" data-id="${i}">--</button></td>
+				<td><button class="btnincrease btn btn-info mr-3" data-id=${i}>++</button>${qty}<button class="btndecrease btn btn-danger ml-3" data-id="${i}">--</button></td>
 				<td>${price+' Ks'}</td>
 				<td>${subtotal+' Ks'} <button data-id="${i}" class="remove btn btn-primary">Remove</button></td>
 				</tr>`;

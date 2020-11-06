@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\Category;
+use App\Brand;
 use App\Subcategory;
 
 class FrontendController extends Controller
@@ -12,8 +13,9 @@ class FrontendController extends Controller
   public function home($value='')
   {
     $items = Item::all();
+     $brands = Brand::all();
     $categories = Category::all();
-    return view('frontend.main',compact('items','categories'));
+    return view('frontend.main',compact('items','categories','brands'));
   }
 
   public function itemdetail($id)

@@ -1,16 +1,24 @@
+
+
 @extends('frontendtemplate')
 
 @section('content')
   <div class="container">
 
+    <h2 class="text-center text-success mt-5">Shopping Cart</h2>
+
+
+
     <div class="row my-5">
 
-      <h2>Shopping Cart</h2>
+      
       <table class="table">
           <thead>
             <tr>
-              <th colspan="3"> Product </th>
-              <th colspan="3"> Qty </th>
+              <th>No</th>
+              <th> Name </th>
+              <th>Product</th>
+              <th> Qty </th>
               <th> Price </th>
               <th> Total </th>
             </tr>
@@ -19,24 +27,24 @@
           </tbody>
           <tfoot id="shoppingcart_tfoot">
             <tr>
-              <td colspan="8">
-                <h3 class="text-right"> Total : <span class="cartTotal"></span> </h3>
+              <td colspan="8" class="text-info">
+                <h3 class="text-right "> Total : <span class="cartTotal"></span> </h3>
               </td>
             </tr>
             <tr> 
               <td colspan="5"> 
-                <textarea class="form-control" id="notes" placeholder="Any Request..."></textarea>
+                <textarea class="form-control notes" id="notes" placeholder="Any Request..."></textarea>
               </td>
               <td colspan="3">
-                <?php if(isset($_SESSION['login_user'])) {?>
-                <button class="btn btn-secondary btn-block mainfullbtncolor checkoutbtn"> 
-                  Check Out 
-                </button>
-                <?php }else{ 
-                  $_SESSION['cartURL'] = 'cart.php';
-                ?>
-                  <a href="login.php" class="btn btn-secondary btn-block mainfullbtncolor"> Check Out </a>
-                <?php } ?>
+                @role('customer')
+                  <button class="btn btn-success checkout">Checkout</button>
+                @else
+                  <button class="btn btn-success">Sign in Checkout</button>
+                @endrole
+              
+                
+                  {{-- <a href="#" class="btn btn-secondary btn-block mainfullbtncolor checkout"> Check Out </a> --}}
+                
               </td>
             </tr>
           </tfoot>
@@ -51,4 +59,24 @@
 
 @section('script')
     <script type="text/javascript" src="{{asset('my_asset/Js/custom.js')}}"></script>
+
+    <script type="text/javascript">
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      
+      $(document).ready(function () {
+        $('.checkout').click(function () {
+          let notes = $('.notes').val();
+          let order = localStorage.getItem('items'); // JSON String
+          $.post("{{route('order.store')}}",{order:order,notes:notes},function (response) {
+            alert(response.msg);
+            localStorage.clear();
+            location.reload();
+          })
+        })
+      })
+    </script>
 @endsection
