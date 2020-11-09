@@ -34,6 +34,10 @@ Route::resource('subcategory','SubcategoryController');
 Route::resource('item','ItemController');
 
 Route::post('filter','ItemController@filterCategory')->name('filterCategory');
+
+
+
+
 });
 //Frontend
 
@@ -44,6 +48,8 @@ Route::get('itemsbysubcategory/{id}','FrontendController@itemsbysubcategory')->n
 Route::get('cart', 'FrontendController@cart')->name('cartpage');
 
 Route::resource('order', 'OrderController');
+
+Route::post('confirm/{id}', 'OrderController@confirm')->name('order.confirm');
 
 
 

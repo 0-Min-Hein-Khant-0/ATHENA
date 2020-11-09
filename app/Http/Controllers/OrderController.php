@@ -76,7 +76,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('order.show',compact('order'));
     }
 
     /**
@@ -111,5 +111,19 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+     public function confirm($id)
+    {
+        $order = Order::find($id);
+        $order->status = 1;
+        $order->save();
+        return back();
+    }
+    public function cancel($id)
+    {
+        $order->delete();
+
+        return redirect()->route('order.index');
     }
 }

@@ -33,15 +33,18 @@
             </tr>
             <tr> 
               <td colspan="5"> 
-                <textarea class="form-control notes" id="notes" placeholder="Any Request..."></textarea>
+
+               
+                <textarea class="form-control notes" id="notes" placeholder="Any Request..." required=""></textarea>
               </td>
               <td colspan="3">
                 @role('customer')
                   <button class="btn btn-success checkout">Checkout</button>
+                 <a href="{{route('mainpage')}}"> <button class="btn btn-info">Go To Shopping</button></a>
                 @else
-                  <button class="btn btn-success">Sign in Checkout</button>
+                  <a href="{{route('signinpage')}}"><button class="btn btn-success">Sign in Checkout</button></a>
                 @endrole
-              
+                </form>
                 
                   {{-- <a href="#" class="btn btn-secondary btn-block mainfullbtncolor checkout"> Check Out </a> --}}
                 
@@ -68,13 +71,17 @@
       });
       
       $(document).ready(function () {
+
+
         $('.checkout').click(function () {
           let notes = $('.notes').val();
           let order = localStorage.getItem('items'); // JSON String
           $.post("{{route('order.store')}}",{order:order,notes:notes},function (response) {
             alert(response.msg);
             localStorage.clear();
+
             location.reload();
+            location.href="/";
           })
         })
       })
